@@ -1,0 +1,303 @@
+Index: calc.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/calc.iml b/calc.iml
+new file mode 100644
+--- /dev/null	(date 1654876156843)
++++ b/calc.iml	(date 1654876156843)
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1654876156906)
++++ b/.idea/modules.xml	(date 1654876156906)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/calc.iml" filepath="$PROJECT_DIR$/calc.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/iscl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/iscl.java b/src/iscl.java
+new file mode 100644
+--- /dev/null	(date 1655985727385)
++++ b/src/iscl.java	(date 1655985727385)
+@@ -0,0 +1,15 @@
++class FactorialException extends Exception {
++
++    int number;
++
++    int getNumber() {
++        return number;
++    }
++
++    FactorialException(String message) {
++
++        super(message);
++        int num = 0;
++        number = num;
++    }
++}
+Index: src/calcolator.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/calcolator.java b/src/calcolator.java
+new file mode 100644
+--- /dev/null	(date 1656019982494)
++++ b/src/calcolator.java	(date 1656019982494)
+@@ -0,0 +1,109 @@
++import java.util.Arrays;
++import java.util.Scanner;
++
++
++public class calcolator {
++
++
++    public static void main(String args[]) throws FactorialException {
++        System.out.println("Введите выражение через пробел 1 + 2 или I + II (от 1 до 10)");
++        Scanner Str = new Scanner(System.in);
++        String s = Str.nextLine();
++        String[] srclist;
++        srclist = new String[3];
++        srclist = s.split(" ");
++
++
++        if (srclist.length > 3) {
++
++            throw new FactorialException("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
++        }
++
++        int[] arr2 = new int[3];
++
++        try {
++            String aCharacterAsString = String.valueOf(srclist[1]);
++        } catch (ArrayIndexOutOfBoundsException e) {
++
++            throw new FactorialException("строка не является математической операцией");
++        }
++        String aCharacterAsString = String.valueOf(srclist[1]);
++
++        String[] arab = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
++        String[] rom = new String[]{"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
++
++        Arrays.asList(arab).contains(srclist[0]);
++
++        roman[] massivrim = roman.values();
++        try {
++            if ((Arrays.asList(arab).contains(srclist[0])) && (Arrays.asList(arab).contains(srclist[2]))) {
++
++                arr2[0] = Integer.parseInt(srclist[0]);
++                arr2[1] = 0;
++                arr2[2] = Integer.parseInt(srclist[2]);
++                int res = 0;
++
++                switch (aCharacterAsString) {
++                    case "+":
++                        res = arr2[0] + arr2[2];
++                        break;
++                    case "-":
++                        res = arr2[0] - arr2[2];
++                        break;
++                    case "*":
++                        res = arr2[0] * arr2[2];
++                        break;
++                    case "/":
++                        res = arr2[0] / arr2[2];
++                        break;
++
++                }
++
++                System.out.println(res);
++
++
++            } else if ((Arrays.asList(rom).contains(srclist[0])) && (Arrays.asList(rom).contains(srclist[2]))) {
++
++                int res = 0;
++                for (int y = 0; y < 3; y++) {
++                    switch (srclist[y]) {
++                        case "I" -> arr2[y] = 1;
++                        case "II" -> arr2[y] = 2;
++                        case "III" -> arr2[y] = 3;
++                        case "IV" -> arr2[y] = 4;
++                        case "V" -> arr2[y] = 5;
++                        case "VI" -> arr2[y] = 6;
++                        case "VII" -> arr2[y] = 7;
++                        case "VIII" -> arr2[y] = 8;
++                        case "IX" -> arr2[y] = 9;
++                        case "X" -> arr2[y] = 10;
++                    }
++                }
++
++
++
++                switch (aCharacterAsString) {
++                    case "+" -> res = arr2[0] + arr2[2];
++                    case "-" -> res = arr2[0] - arr2[2];
++                    case "*" -> res = arr2[0] * arr2[2];
++                    case "/" -> res = arr2[0] / arr2[2];
++                }
++                int romanIndex = res;
++                if (romanIndex < 0) {
++                    throw new FactorialException("в римской системе нет отрицательных чисел");
++                }
++                System.out.println(roman.values()[romanIndex]);
++            } else if (((Arrays.asList(arab).contains(srclist[0])) && (Arrays.asList(rom).contains(srclist[2]))) || ((Arrays.asList(rom).contains(srclist[0])) && (Arrays.asList(arab).contains(srclist[2]))))
++            {
++                throw new FactorialException("используются одновременно разные системы счисления");
++            }
++            else {
++                throw new FactorialException("строка не является математической операцией");
++            }
++
++        } catch (NumberFormatException e) {
++            throw new RuntimeException(e);
++        }
++    }
++
++}
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1654876156937)
++++ b/.idea/misc.xml	(date 1654876156937)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/roman.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/roman.java b/src/roman.java
+new file mode 100644
+--- /dev/null	(date 1655985727386)
++++ b/src/roman.java	(date 1655985727386)
+@@ -0,0 +1,33 @@
++enum roman {
++    O("0"), I("1"), II("2"), III("3"), IV("4"), V("5"), VI("6"), VII("7"), VIII("8"), IX("9"), X("10"),
++    XI("11"), XII("12"), XIII("13"), XIV("14"), XV("15"), XVI("16"), XVII("17"), XVIII("18"), XIX("19"), XX("20"),
++    XXI("21"), XXII("22"), XXIII("23"), XXIV("24"), XXV("25"), XXVI("26"), XXVII("27"), XXVIII("28"), XXIX("29"), XXX("30"), XXXI("31"), XXXII("32"), XXXIII("33"), XXXIV("34"), XXXV("35"), XXXVI("36"), XXXVII("37"), XXXVIII("38"), XXXIX("39"), XL("40"),
++    XLI("41"), XLII("42"), XLIII("43"), XLIV("44"), XLV("45"), XLVI("46"), XLVII("47"), XLVIII("48"), XLIX("49"), L("50"), LI("51"), LII("52"), LIII("53"), LIV("54"), LV("55"), LVI("56"), LVII("57"), LVIII("58"), LIX("59"), LX("60"),
++    LXI("61"), LXII("62"), LXIII("63"), LXIV("64"), LXV("65"), LXVI("66"), LXVII("67"), LXVIII("68"), LXIX("69"), LXX("70"),
++    LXXI("71"), LXXII("72"), LXXIII("73"), LXXIV("74"), LXXV("75"), LXXVI("76"), LXXVII("77"), LXXVIII("78"), LXXIX("79"), LXXX("80"),
++    LXXXI("81"), LXXXII("82"), LXXXIII("83"), LXXXIV("84"), LXXXV("85"), LXXXVI("86"), LXXXVII("87"), LXXXVIII("88"), LXXXIX("89"), XC("90"),
++    XCI("91"), XCII("92"), XCIII("93"), XCIV("94"), XCV("95"), XCVI("96"), XCVII("97"), XCVIII("98"), XCIX("99"), C("100");
++    private String title;
++
++    roman(String title) {
++        this.title = title;
++    }
++
++
++    static int ordinal(int romanIndex) {
++        return romanIndex;
++    }
++
++    static int values(int romanIndex) {
++        return (romanIndex);
++    }
++
++    String getTitle() {
++        return title;
++    }
++
++
++}
++
++
++
+Index: src/META-INF/MANIFEST.MF
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/META-INF/MANIFEST.MF b/src/META-INF/MANIFEST.MF
+new file mode 100644
+--- /dev/null	(date 1655931569151)
++++ b/src/META-INF/MANIFEST.MF	(date 1655931569151)
+@@ -0,0 +1,3 @@
++Manifest-Version: 1.0
++Main-Class: calcolator
++
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+--- /dev/null	(date 1656020034557)
++++ b/.gitignore	(date 1656020034557)
+@@ -0,0 +1,2 @@
++# Project exclude paths
++/out/
+\ No newline at end of file
+Index: .idea/artifacts/calc_jar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/artifacts/calc_jar.xml b/.idea/artifacts/calc_jar.xml
+new file mode 100644
+--- /dev/null	(date 1655931679245)
++++ b/.idea/artifacts/calc_jar.xml	(date 1655931679245)
+@@ -0,0 +1,8 @@
++<component name="ArtifactManager">
++  <artifact type="jar" build-on-make="true" name="calc:jar">
++    <output-path>$PROJECT_DIR$/out/artifacts/calc_jar</output-path>
++    <root id="archive" name="calc.jar">
++      <element id="module-output" name="calc" />
++    </root>
++  </artifact>
++</component>
+\ No newline at end of file
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1654876181116)
++++ b/.idea/.gitignore	(date 1654876181116)
+@@ -0,0 +1,3 @@
++# Default ignored files
++/shelf/
++/workspace.xml
